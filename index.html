@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
+    <script src="https://kit.fontawesome.com/361d11aa35.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section id="navigation">
+        <div class="container">
+            <div class="row nav__row">
+                <div class="top__left">
+                    <img src="./resources/cloud.jpg" class="nav__img" alt="">
+                    <h1 class="site__title">WeatherPal, Your International Travel Companion</h1>
+                </div>
+                <div class="nav__links">
+                    <a href="" class="nav__link">Home</a>
+                    <a href="#weather" class="nav__link">Search</a>
+                    <a href="" class="nav__link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="weather"></section>
+        <div class="container">
+            <div class="row">
+                <div class="weather__list">
+                    <div class="weather__category">
+                        <div class="weather__card">
+                            <h3>City</h3>
+                            <img src="" alt="">
+                            <p><b>Current Weather Description</b></p>
+                            <p><b>Current Time</b></p>
+                            <p><b>Temperature</b></p>
+                            <p><b>Wind Speed and Direction</b></p>
+                            <p><b>Sunrise</b></p>
+                            <p><b>Sunset</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="weather__query">
+                    <input class="weather__input" type="text" placeholder="Search by city..." onchange="getCurrentData(event)">
+                    <button class="weather__button" onsubmit="getCurrentData()">Search</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
