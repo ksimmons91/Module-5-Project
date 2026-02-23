@@ -13,6 +13,7 @@ body{
 
 .container {
     padding: 96px 0;
+    overflow-x: hidden;
 }
 
 .row {
@@ -20,6 +21,7 @@ body{
     padding: 0;
     width: 100%;
     max-width: 1200px;
+    overflow-x: hidden;
 }
 
 a {
@@ -28,6 +30,15 @@ a {
 
 p {
     padding: 2px;
+}
+
+label {
+    font-size: 36px;
+}
+
+select {
+    font-size: 24px;
+    border-style: solid;
 }
 
 /* 
@@ -42,6 +53,7 @@ NAVIGATION
 .nav__row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .site__title {
@@ -69,21 +81,95 @@ NAVIGATION
     color: black;
     padding: 12px;
     transition: all 300ms ease;
-    font-size: 32px;
+    font-size: 28px;
 }
 
 .nav__link:hover {
     text-decoration: underline;
 }
 
+.menu__window {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    transition: all 300ms ease;
+    transform: translate(100%);
+    opacity: 0;
+    z-index: 100;
+    background-color: grey;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.button__menu {
+    font-size: 40px;
+    height: 70px;
+    width: 70px;
+    border-radius: 20%;
+    background-color: teal;
+    display: none;
+}
+
+.menu--open {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.menu--open .menu__window {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0);
+}
+
 /* 
 WEATHER 
 */
 
+.weather__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.weather__spinner {
+    font-size: 48px;
+    display: none !important;
+}
+
+.weather__current .weather__spinner,
+.weather__past .weather__spinner,
+.weather__range .weather__spinner{
+    display: block;
+}
+
+.range__card--wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fa-spinner{
+    animation: rotate 600ms infinite linear;
+}
+
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .weather__input {
     padding: 24px 48px;
+    margin: 12px 0;
     border-radius: 20px;
     width: 80%;
 }
@@ -99,11 +185,6 @@ WEATHER
 
 .weather__current, .weather__past, .weather__range {
     margin: 50px 0;
-}
-
-.weather__range{
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .weather__card {
@@ -123,21 +204,51 @@ WEATHER
     background-color: white;
 }
 
+.weather__range {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.range__query{
+    width: 100%;
+}
+
+
 @media (max-width: 850px){
 
-    .weather__card{
+    .weather__card {
         width: 30%;
     }
 }
 
 @media (max-width: 720px){
-    .weather__card{
+
+    .weather__card {
         width: 45%;
+    }
+
+    .row {
+        width: 100%;
+    }
+
+    .button__menu {
+        display: block;
+    }
+
+    .nav__links {
+        display: none;
     }
 }
 
 @media (max-width: 480px){
     .weather__card{
         width: 90%;
+    }
+
+    .weather__query {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
     }
 }

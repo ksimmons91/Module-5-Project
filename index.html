@@ -21,6 +21,17 @@
                     <a href="#weather" class="nav__link">Search</a>
                     <a href="" class="nav__link">Contact</a>
                 </div>
+                <button class="button__menu" onclick="openMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="menu__window">
+                    <button class="button__menu menu__close" onclick="closeMenu()">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                    <a href="#navigation" class="nav__link">Home</a>
+                    <a href="#weather" class="nav__link">Search</a>
+                    <a href="" class="nav__link">Contact</a>
+                </div>
             </div>
         </div>
     </section>
@@ -29,7 +40,10 @@
             <div class="row">
                 <div class="weather__current">
                     <div class="weather__category">
-                        <label for="current">Search for current weather conditions by location</label>
+                        <label for="current">Search for current weather conditions by location:</label>
+                    </div>
+                    <div class="weather__loading">
+                        <i class="fa-solid fa-spinner weather__spinner"></i>
                     </div>
                     <div class="weather__query weather__current">
                         <input class="weather__input city__current" type="text" placeholder="Enter city of interest..." onchange="getCurrentData()">
@@ -38,7 +52,10 @@
                 </div>
                 <div class="weather__past">
                     <div class="weather__category">
-                        <label for="past">Search for past weather conditions by location</label>
+                        <label for="past">Search for past weather conditions by location:</label>
+                    </div>
+                    <div class="weather__loading">
+                        <i class="fa-solid fa-spinner weather__spinner"></i>
                     </div>
                     <div class="weather__query weather__past">
                         <input class="weather__input city__past" type="text" placeholder="Enter city of interest...">
@@ -48,13 +65,16 @@
                 </div>
                 <div class="weather__range">
                     <div class="weather__category">
-                        <label>Search for weather conditions over time in the same location (60 days or less)</label>
+                        <label>Search for weather conditions over time in the same location (60 days or less):</label>
                     </div>
-                    <div class="weather__query weather__range">
+                    <div class="weather__query range__query">
+                        <div class="weather__loading">
+                            <i class="fa-solid fa-spinner weather__spinner range__spinner"></i>
+                        </div>
                         <input class="weather__input city__range" type="text" placeholder="Enter city of interest...">
                         <input class="weather__input range__start" type="text" placeholder="Enter start date after 2008-07-01 in YYYY-MM-DD format..." onchange="">
                         <input class="weather__input range__end" type="text" placeholder="Enter end date after 2008-07-01 in YYYY-MM-DD format..." onchange="getHistoricalRangeData()">
-                        <button class="weather__button" onsubmit="getHistoricalRangeData()">Search</button>
+                        <button class="weather__button range__button" onsubmit="getHistoricalRangeData()">Search</button>
                     </div>
                 </div>
             </div>
