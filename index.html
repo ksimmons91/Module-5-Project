@@ -17,7 +17,7 @@
                     <h1 class="site__title">WeatherPal, Your International Travel Companion</h1>
                 </div>
                 <div class="nav__links">
-                    <a href="" class="nav__link">Home</a>
+                    <a href="#navigation" class="nav__link">Home</a>
                     <a href="#weather" class="nav__link">Search</a>
                     <a href="" class="nav__link">Contact</a>
                 </div>
@@ -27,23 +27,35 @@
     <section id="weather"></section>
         <div class="container">
             <div class="row">
-                <div class="weather__list">
+                <div class="weather__current">
                     <div class="weather__category">
-                        <div class="weather__card">
-                            <h3>City</h3>
-                            <img src="" alt="">
-                            <p><b>Current Weather Description</b></p>
-                            <p><b>Current Time</b></p>
-                            <p><b>Temperature</b></p>
-                            <p><b>Wind Speed and Direction</b></p>
-                            <p><b>Sunrise</b></p>
-                            <p><b>Sunset</b></p>
-                        </div>
+                        <label for="current">Search for current weather conditions by location</label>
+                    </div>
+                    <div class="weather__query weather__current">
+                        <input class="weather__input city__current" type="text" placeholder="Enter city of interest..." onchange="getCurrentData()">
+                        <button class="weather__button" onsubmit="getCurrentData()">Search</a></button>
                     </div>
                 </div>
-                <div class="weather__query">
-                    <input class="weather__input" type="text" placeholder="Search by city..." onchange="getCurrentData(event)">
-                    <button class="weather__button" onsubmit="getCurrentData()">Search</a></button>
+                <div class="weather__past">
+                    <div class="weather__category">
+                        <label for="past">Search for past weather conditions by location</label>
+                    </div>
+                    <div class="weather__query weather__past">
+                        <input class="weather__input city__past" type="text" placeholder="Enter city of interest...">
+                        <input class="weather__input date__past" type="text" placeholder="Enter a date after 2008-07-01 in YYYY-MM-DD format.." onchange="getHistoricalData()">
+                        <button class="weather__button" onsubmit="getHistoricalData()">Search</button>
+                    </div>
+                </div>
+                <div class="weather__range">
+                    <div class="weather__category">
+                        <label>Search for weather conditions over time in the same location (60 days or less)</label>
+                    </div>
+                    <div class="weather__query weather__range">
+                        <input class="weather__input city__range" type="text" placeholder="Enter city of interest...">
+                        <input class="weather__input range__start" type="text" placeholder="Enter start date after 2008-07-01 in YYYY-MM-DD format..." onchange="">
+                        <input class="weather__input range__end" type="text" placeholder="Enter end date after 2008-07-01 in YYYY-MM-DD format..." onchange="getHistoricalRangeData()">
+                        <button class="weather__button" onsubmit="getHistoricalRangeData()">Search</button>
+                    </div>
                 </div>
             </div>
         </div>
