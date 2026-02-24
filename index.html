@@ -42,7 +42,7 @@
                     <div class="weather__category">
                         <label for="current">Search for current weather conditions by location:</label>
                     </div>
-                    <div class="weather__loading">
+                    <div class="weather__loading is-loading">
                         <i class="fa-solid fa-spinner weather__spinner"></i>
                     </div>
                     <div class="weather__query weather__current">
@@ -54,7 +54,7 @@
                     <div class="weather__category">
                         <label for="past">Search for past weather conditions by location:</label>
                     </div>
-                    <div class="weather__loading">
+                    <div class="weather__loading is-loading">
                         <i class="fa-solid fa-spinner weather__spinner"></i>
                     </div>
                     <div class="weather__query weather__past">
@@ -65,10 +65,10 @@
                 </div>
                 <div class="weather__range">
                     <div class="weather__category">
-                        <label>Search for weather conditions over time in the same location (60 days or less):</label>
+                        <label for="range">Search for weather conditions over time in the same location (60 days or less):</label>
                     </div>
                     <div class="weather__query range__query">
-                        <div class="weather__loading">
+                        <div class="weather__loading is-loading">
                             <i class="fa-solid fa-spinner weather__spinner range__spinner"></i>
                         </div>
                         <input class="weather__input city__range" type="text" placeholder="Enter city of interest...">
@@ -80,5 +80,17 @@
             </div>
         </div>
     </section>
+    <footer>
+        <div class="container">
+            <div class="row footer__row">
+                <p class="footer__text">Copyright &copy; 2026 WeatherPal. All rights reserved.</p>
+                <div class="footer__links">
+                    <a href="#navigation" class="footer__link">Home</a>
+                    <a href="#weather" class="footer__link">Search</a>
+                    <a href="" class="footer__link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -41,6 +41,10 @@ select {
     border-style: solid;
 }
 
+footer {
+    background-color: #8463AF;
+}
+
 /* 
 NAVIGATION
 
@@ -141,9 +145,7 @@ WEATHER
     display: none !important;
 }
 
-.weather__current .weather__spinner,
-.weather__past .weather__spinner,
-.weather__range .weather__spinner{
+.is-loading .weather__spinner {
     display: block;
 }
 
@@ -213,6 +215,39 @@ WEATHER
     width: 100%;
 }
 
+/* 
+FOOTER
+*/
+
+.footer__row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px 0;
+}
+
+.footer__links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer__link {
+    padding: 20px;
+    font-size: 18px;   
+}
+
+.footer__link:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+.footer__text {
+    font-size: 24px;
+}
+
 
 @media (max-width: 850px){
 
@@ -238,6 +273,10 @@ WEATHER
     .nav__links {
         display: none;
     }
+
+    .footer__text {
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 480px){
@@ -250,5 +289,10 @@ WEATHER
         align-items: center;
         justify-content: center;
         flex-direction: column;
+    }
+
+    .footer__text {
+        font-size: 18px;
+        text-align: center;
     }
 }

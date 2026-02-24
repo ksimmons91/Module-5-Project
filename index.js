@@ -14,9 +14,13 @@ function closeMenu() {
 async function getCurrentData(){
     const city = document.querySelector('.city__current').value
     const currentWeatherEl = document.querySelector('.weather__current')
+    currentWeatherEl.classList.add('is-loading')
     const newPromise = await fetch(`https://api.weatherstack.com/current?access_key=f9a4dc3dbcd1673b1844d2e8132bc2f9&query=${city}`)
     const currentDataObject = await newPromise.json()
-    currentWeatherEl.classList += " weather__loading"
+    if (!newPromise.ok){
+        alert("An invalid location has been entered. Please enter a valid location.")
+    }
+    currentWeatherEl.classList.remove('is-loading')
         currentWeatherEl.innerHTML = `
             <div class="weather__card current__card">
                 <h3>Location: ${currentDataObject.location.name}, ${currentDataObject.location.country}</h3>
@@ -33,16 +37,21 @@ async function getCurrentData(){
         <input class="weather__input city__current" type="text" placeholder="Enter city of interest..." onchange="getCurrentData()">
         <button class="weather__button" onsubmit="getCurrentData()">Search</a></button>    
         `
-    currentWeatherEl.classList.remove('weather__loading')
 }
 
 async function getHistoricalData(){
     const city = document.querySelector('.city__past').value
     const pastDate = document.querySelector('.date__past').value
+    const pastWeatherEl = document.querySelector('.weather__past')
+    pastWeatherEl.classList += " is-loading"
     const newPromise = await fetch(`https://api.weatherstack.com/historical?access_key=f9a4dc3dbcd1673b1844d2e8132bc2f9&query=${city}&historical_date=${pastDate}`)
     const pastDataObject = await newPromise.json()
-    const pastWeatherEl = document.querySelector('.weather__past')
-    pastWeatherEl.classList += " weather__loading"
+    
+    if (!newPromise.ok){
+        alert("An invalid location and/or date has been entered. Please enter a valid location and date after 2008-07-01.")
+    }
+
+    pastWeatherEl.classList.remove('is-loading')
     pastWeatherEl.innerHTML = `
     <div class="weather__card past__card">
     <h3>Location: ${pastDataObject.location.name}, ${pastDataObject.location.country}</h3>
@@ -60,7 +69,6 @@ async function getHistoricalData(){
     <button class="weather__button" onsubmit="getHistoricalData()">Search</button>
     
     `
-    pastWeatherEl.classList.remove('weather__loading')
 }
 
 async function getHistoricalRangeData(){
@@ -70,6 +78,10 @@ async function getHistoricalRangeData(){
     const newPromise = await fetch(`https://api.weatherstack.com/historical?access_key=f9a4dc3dbcd1673b1844d2e8132bc2f9&query=${city}&historical_date_start=${startDate}&historical_date_end=${endDate}`)
     const rangeDataObject = await newPromise.json()
 
+    if (!newPromise.ok){
+        alert("An invalid location and/or date range has been entered. Please enter a valid location and date range within 60 days.")
+    }
+
     storedRangedData = rangeDataObject.historical
     storedRangedLocation = rangeDataObject.location
     renderRangeCards(Object.values(storedRangedData))
@@ -77,8 +89,22 @@ async function getHistoricalRangeData(){
 
 function renderRangeCards(dataArray) {
     const rangeWeatherEl = document.querySelector('.weather__range')
-    rangeWeatherEl.classList += " weather__loading"
+    rangeWeatherEl.classList += " is-loading"
     let cardsHTML = ''
+    rangeWeatherEl.classList.remove('is-loading')
+
+    rangeWeatherEl.innerHTML = `
+    <div>
+        <select id="filter" onchange="filterWeatherCards(event)">
+            <option value="" disabled selected>Sort by category:</option>
+            <option value="LOW_TEMPERATURE">Low temperature</option>
+            <option value="HIGH_TEMPERATURE">High temperature</option>
+            <option value="AVERAGE_TEMPERATURE">Average temperature</option>
+            <option value="SUNLIGHT">Hours of Sunlight</option>
+        </select>
+    </div>
+    `
+
     dataArray.forEach(function(item){
         cardsHTML +=   ` 
     <div class="weather__card past__card">
@@ -94,16 +120,7 @@ function renderRangeCards(dataArray) {
     `
     })
 
-    rangeWeatherEl.innerHTML = cardsHTML + `
-    <div>
-        <select id="filter" onchange="filterWeatherCards(event)">
-            <option value="" disabled selected>Sort by category:</option>
-            <option value="LOW_TEMPERATURE">Low temperature</option>
-            <option value="HIGH_TEMPERATURE">High temperature</option>
-            <option value="AVERAGE_TEMPERATURE">Average temperature</option>
-            <option value="SUNLIGHT">Hours of Sunlight</option>
-        </select>
-    </div>
+    rangeWeatherEl.innerHTML += cardsHTML + `
     <div class="weather__query range__query">
         <h3>Search again for historical data in a different date range and/or location:</h3>
         <input class="weather__input city__range" type="text" placeholder="Enter city of interest...">
@@ -112,8 +129,6 @@ function renderRangeCards(dataArray) {
         <button class="weather__button" onsubmit="getHistoricalRangeData()">Search</button>
     </div>
     `
-    rangeWeatherEl.classList.remove('weather__loading')
-
 }
 
 async function filterWeatherCards(event){
